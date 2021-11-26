@@ -1,14 +1,18 @@
 import React, { useRef } from "react";
-import { useGlobalContext } from "../context";
+// import { useGlobalContext } from "../context";
+import { setSearch } from "../redux/action";
+import { useDispatch } from "react-redux";
 
 const SearchForm = () => {
-    const { setSearchInput } = useGlobalContext();
-
+    // const { setSearchInput } = useGlobalContext();
+    // const loading = useSelector((state) => state.loading);
+    const dispatch = useDispatch();
     const searchValue = useRef("");
 
     // console.log(searchValue.current.value);
     const search = () => {
-        setSearchInput(searchValue.current.value);
+        // setSearchInput(searchValue.current.value);
+        dispatch(setSearch(searchValue.current.value));
         // setSearchInput(123);
     };
     // console.log(searchInput);

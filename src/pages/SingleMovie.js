@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Loading from "../components/Loading";
 import { useParams, Link } from "react-router-dom";
-import { useGlobalContext } from "../context";
+// import { useGlobalContext } from "../context";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleLoading } from "../redux/action";
 const SingleMovie = () => {
-    const { loading, setLoading } = useGlobalContext();
+    // const { loading, setLoading } = useGlobalContext();
+    const loading = useSelector((state) => state.loading);
+    const dispatch = useDispatch();
+
     const { id } = useParams();
 
     const [movie, setmovie] = useState(null);
@@ -11,7 +16,7 @@ const SingleMovie = () => {
     useEffect(() => {
         const movieUrl = `https://api.themoviedb.org/3/movie/${id}?api_key=495929e07087fc60f588e4637b6e89ad`;
         async function getData() {
-            setLoading(true);
+            dispatch(toggleLoading(true));
             try {
                 const res = await fetch(movieUrl);
                 const data = await res.json();
@@ -55,10 +60,10 @@ const SingleMovie = () => {
             } catch (error) {
                 console.log(error);
             }
-            setLoading(false);
+            dispatch(toggleLoading(false));
         }
         getData();
-    }, [id, setLoading]);
+    }, [id, dispatch]);
 
     if (loading) return <Loading />;
     if (!movie) return <h1 className="section-title">Not Found</h1>;

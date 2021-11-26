@@ -1,0 +1,7 @@
+const ACTIONS = {
+    TOGGLE_LOADING: "TOGGLE_LOADING",
+    SET_SEARCH: "SET_SEARCH_INPUT",
+    SET_MOVIE: "SET_MOVIE",
+};
+
+export default ACTIONS;

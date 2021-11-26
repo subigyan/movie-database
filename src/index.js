@@ -2,14 +2,18 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import { AppProvider } from "./context";
+import store from "./redux/store";
+import { Provider } from "react-redux";
+
+// import { AppProvider } from "./context";      Aba redux used for state management instaed of context API
+
 ReactDOM.render(
     <React.StrictMode>
-        {/* <Router> */}
-        <AppProvider>
+        <Provider store={store}>
+            {/* <AppProvider> */}
             <App />
-        </AppProvider>
-        {/* </Router> */}
+            {/* </AppProvider> */}
+        </Provider>
     </React.StrictMode>,
     document.getElementById("root")
 );
